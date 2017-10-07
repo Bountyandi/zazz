@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchTerminos, changeTermino, removeTermino } from '../actions/asyncActions'
+import { fetchTerminos, removeTermino } from '../actions/asyncActions'
 import Termino from '../components/Termino'
 
 class List extends Component {
@@ -15,7 +15,7 @@ class List extends Component {
   }
 
   render() {
-    const { terminos } = this.props
+    const { terminos } = this.props;
 
     return (
       <div>
@@ -25,7 +25,6 @@ class List extends Component {
             _id={item._id}
             name={item.name}
             description={item.description}
-            changeTermino={this.props.changeTermino}
             removeTermino={this.props.removeTermino}
           />
         )}
@@ -40,4 +39,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchTerminos, changeTermino, removeTermino })(List)
+export default connect(mapStateToProps, { fetchTerminos, removeTermino })(List)

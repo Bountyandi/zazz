@@ -1,9 +1,9 @@
+import mongodb from 'mongodb';
 
 // remember about pagination and autoloading
 export const getTerminos = (req, res) => {
-  console.log(req)
-  db.collection('terminos').find({}).toArray((err, terminos) => {
-    //errorHandler(err);
+  global.db.collection('terminos').find({}).toArray((err, terminos) => {
+    errorHandler(err);
     res.json({ terminos });
   })
 };
@@ -11,7 +11,7 @@ export const getTerminos = (req, res) => {
 export const searchTerminos = (req, res) => {
   const { substr } = req.params;
 
-  db.collection('terminos').find(
+  global.db.collection('terminos').find(
     {
       $or: [
         { name: {$regex: `.*${substr}.*`} },
@@ -27,7 +27,7 @@ export const searchTerminos = (req, res) => {
 export const postTermino = (req, res) => {
   const { name, description } = req.body;
 
-  db.collection('terminos').insert({ name, description }, (err, result) => {
+  global.db.collection('terminos').insert({ name, description }, (err, result) => {
     errorHandler(err);
     res.json({ termino: result.ops[0]})
   })
@@ -36,7 +36,7 @@ export const postTermino = (req, res) => {
 export const putTermino = (req, res) => {
   const { _id, name, description } = req.body;
 
-  db.collection('terminos').update(
+  global.db.collection('terminos').update(
     { _id: new mongodb.ObjectId(_id) },
     { $set: { name, description } },
     (err, result) => {
@@ -48,10 +48,17 @@ export const putTermino = (req, res) => {
 export const deleteTermino = (req, res) => {
   const { _id } = req.body;
 
-  db.collection('terminos').remove(
+  global.db.collection('terminos').remove(
     { _id: new mongodb.ObjectId(_id) },
     (err, result) => {
       errorHandler(err);
       res.json({ _id });
     })
 };
+
+
+function errorHandler(err) {
+  if (err) {
+    res.status(500).json({errors: {global: 'Something went wrong'}});
+  }
+}

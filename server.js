@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 
 import * as api from './server/apiHandlers'
 
-
 const PORT = 3000;
 
 const PUBLIC_PATH = __dirname + '/public';
@@ -14,28 +13,10 @@ const app = express();
 app.use(bodyParser.json());
 const dbUrl = 'mongodb://127.0.0.1/zazzdb';
 
-// ---------------------------- Webpack
-const isDevelopment = process.env.NODE_ENV === 'development';
-
-if (isDevelopment) {
-  const webpack = require('webpack');
-  const webpackConfig = require('./webpack.config.babel').default;
-  const compiler = webpack(webpackConfig);
-  app.use(require('webpack-dev-middleware')(compiler, {
-    hot: true,
-    stats: {
-      colors: true
-    }
-  }));
-  app.use(require('webpack-hot-middleware')(compiler));
-}
-else {
-  app.use(express.static(PUBLIC_PATH));
-}
-// ---------------------------- /Webpack
-
 
 mongodb.MongoClient.connect(dbUrl, (dbErr, db) => {
+
+  global.db = db;
 
   app.get('/api/terminos/', api.getTerminos);
 
@@ -48,6 +29,8 @@ mongodb.MongoClient.connect(dbUrl, (dbErr, db) => {
   app.delete('/api/terminos/', api.deleteTermino);
 
 });
+
+
 
 /*
 
@@ -112,13 +95,28 @@ mongodb.MongoClient.connect(dbUrl, (err, db) => {
 
 */
 
-function errorHandler(err) {
-  if (err) {
-    res.status(500).json({errors: {global: 'Something went wrong'}});
-    //return;
-  }
-}
 
 app.listen(PORT, function() {
   console.log('Listening on port ' + PORT + '...');
 });
+
+// ---------------------------- Webpack
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+if (isDevelopment) {
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config.babel').default;
+  const compiler = webpack(webpackConfig);
+  app.use(require('webpack-dev-middleware')(compiler, {
+    hot: true,
+    stats: {
+      colors: true
+    }
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
+}
+else {
+  app.use(express.static(PUBLIC_PATH));
+}
+// ---------------------------- /Webpack
+

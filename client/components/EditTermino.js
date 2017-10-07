@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
-import { changeTermino } from '../actions/actions';
+import { changeTermino } from '../actions/asyncActions';
 
 class EditTerminoView extends Component {
 
@@ -33,14 +33,12 @@ class EditTerminoView extends Component {
   }
 
   handleSubmit(event){
-    event.preventDefault()
+    event.preventDefault();
 
     //debugger
 
-    this.props.changeTermino(this.state)
-    // IF state == succes THEN close popup ELSE show red attention
-    this.props.hideModal(this.props.modalName)
-    //input.value = ''
+    this.props.changeTermino(this.state);
+    this.props.hideModal(this.props.modalName);
   }
 
   render() {
@@ -59,5 +57,5 @@ class EditTerminoView extends Component {
 
 }
 
-const EditTermino = connect(null, { changeTermino })(EditTerminoView)
+const EditTermino = connect(null, { changeTermino })(EditTerminoView);
 export default EditTermino
