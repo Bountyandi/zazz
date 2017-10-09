@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { searchTerminos, fetchTerminos } from '../actions/asyncActions';
 import _ from 'underscore';
 
+import { Input, Form } from 'semantic-ui-react';
+
 class SearchBox extends Component {
 
   constructor(props) {
@@ -35,8 +37,16 @@ class SearchBox extends Component {
 
     return (
       <div>
-        <h4>Search</h4>
-        <input type='text' onChange={this.search} />
+        <br/>
+        <Form.Field>
+          {/*<label>Search</label>*/}
+          <Input
+            icon='search'
+            placeholder='Search...'
+            onChange={this.search} />
+        </Form.Field>
+        <br/>
+
       </div>
     )
   }

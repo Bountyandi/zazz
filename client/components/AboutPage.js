@@ -1,9 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Header, Icon } from 'semantic-ui-react';
 
-const AboutPage = ({  }) => (
+const AboutPage = () => (
   <div>
-    <h3>About page</h3>
+    <AboutHeader />
+
+
   </div>
-)
+);
+
+const AboutHeader = () => (
+  <Header
+    as='h2'
+    color='black'
+    /*subheader='Little bit about ZZAZ'*/
+  >
+    <Header.Content>
+      <Icon name='info' />
+      About
+    </Header.Content>
+  </Header>
+);
 
 export default AboutPage

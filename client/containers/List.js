@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { fetchTerminos, removeTermino } from '../actions/asyncActions'
-import Termino from '../components/Termino'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchTerminos, removeTermino } from '../actions/asyncActions';
+import Termino from '../components/Termino';
+
+import { Item } from 'semantic-ui-react';
 
 class List extends Component {
   //static propTypes = {
@@ -16,19 +18,20 @@ class List extends Component {
 
   render() {
     const { terminos } = this.props;
+    const listItems = terminos.map( item =>
+      <Termino
+        key={item._id}
+        _id={item._id}
+        name={item.name}
+        description={item.description}
+        removeTermino={this.props.removeTermino}
+      />
+    );
 
     return (
-      <div>
-        {terminos.map(item =>
-          <Termino
-            key={item._id}
-            _id={item._id}
-            name={item.name}
-            description={item.description}
-            removeTermino={this.props.removeTermino}
-          />
-        )}
-      </div>
+      <Item.Group>
+        {listItems}
+      </Item.Group>
     )
   }
 }

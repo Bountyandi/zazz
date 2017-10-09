@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Popup from './popup/popup'
 
+import { Item, Button } from 'semantic-ui-react'
+
 
 export default class Termino extends Component {
 
@@ -12,7 +14,7 @@ export default class Termino extends Component {
     removeTermino: PropTypes.func.isRequired,
   };
 
-  handleDoubleClick = () => {
+  handleDoubleClick = (ev) => {
     //this.setState({editing: true})
   };
 
@@ -22,19 +24,31 @@ export default class Termino extends Component {
     const termino = { _id, name, description };
 
     return (
-      <div onDoubleClick={this.handleDoubleClick}>
-        <p><strong>{name}</strong> - {description}</p>
+      <Item onDoubleClick={this.handleDoubleClick}>
 
+        <Item.Content>
+          <Item.Header as='p'>{name}</Item.Header>
+          <Item.Description>
+            <p>{description}</p>
+          </Item.Description>
+          
+          {/*TODO: Make 2 icons EDIT and DELETE*/}
 
-        <Popup
-          buttonName='Edit'
-          componentName='EditTermino'
-          termino ={termino}
-        />
+          <Popup
+            class='edit'
+            buttonName='Edit'
+            componentName='EditTermino'
+            termino={termino}
+          />
 
+         <Button
+            content='Delete'
+            onClick={() => removeTermino({ _id })}
+          />
 
-        <button onClick={() => removeTermino({ _id })}>Delete</button>
-      </div>
+        </Item.Content>
+
+      </Item>
     )
   }
 }

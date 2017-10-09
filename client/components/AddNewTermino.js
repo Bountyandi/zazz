@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+
+import {
+  Container,
+  Button,
+  Input,
+  TextArea,
+  Form } from 'semantic-ui-react';
 
 import { saveTermino } from '../actions/asyncActions';
 
@@ -37,23 +44,34 @@ class AddNewTerminoView extends Component {
     this.props.saveTermino(this.state);
   }
 
-
   render() {
     return (
-      <div>
+      <Container>
 
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
 
-          <input type='text' value={this.state.name} onChange={this.handleChangeName} />
-          <br/>
-          <textarea value={this.state.description} onChange={this.handleChangeDescription} />
-          <br/>
-          <button type='submit'>
+          <Form.Field>
+            <label>Name</label>
+            <Input
+              placeholder='First Name'
+              value={this.state.name}
+              onChange={this.handleChangeName} />
+          </Form.Field>
+
+          <Form.Field>
+            <label>Description</label>
+            <TextArea
+              value={this.state.description}
+              onChange={this.handleChangeDescription} />
+          </Form.Field>
+
+          <Button type='submit'>
             Save
-          </button>
+          </Button>
 
-        </form>
-      </div>
+        </Form>
+
+      </Container>
     )
   }
 
