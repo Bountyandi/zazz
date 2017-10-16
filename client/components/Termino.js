@@ -14,13 +14,23 @@ export default class Termino extends Component {
     removeTermino: PropTypes.func.isRequired,
   };
 
+  constructor(props){
+    super(props);
+    this.removeTermino = this.removeTermino.bind(this);
+  }
+
+  removeTermino () {
+    this.props.removeTermino({ _id: this.props._id });
+  }
+
+
   handleDoubleClick = (ev) => {
     //this.setState({editing: true})
   };
 
   render() {
 
-    const { _id, name, description, removeTermino } = this.props;
+    const { _id, name, description } = this.props;
     const termino = { _id, name, description };
 
     return (
@@ -31,19 +41,23 @@ export default class Termino extends Component {
           <Item.Description>
             <p>{description}</p>
           </Item.Description>
-          
-          {/*TODO: Make 2 icons EDIT and DELETE*/}
 
-          <Popup
-            class='edit'
-            buttonName='Edit'
-            componentName='EditTermino'
-            termino={termino}
+          {/*TODO: Make 2 icons EDIT and DELETE*/}
+          <Button compact
+            icon={'close'}
+            content={'Delete'}
+            floated={'right'}
+            color={'red'}
+            onClick={this.removeTermino}
           />
 
-         <Button
-            content='Delete'
-            onClick={() => removeTermino({ _id })}
+          <Popup
+            icon={'edit'}
+            buttonName={'Edit'}
+            floated={'right'}
+            buttonColor={'green'}
+            componentName={'EditTermino'}
+            termino={termino}
           />
 
         </Item.Content>

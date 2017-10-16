@@ -27,8 +27,6 @@ import AboutPage from '../AboutPage'
       <Route path='/statistics' component={StatisticsPage}/>
       <Route path='/about' component={AboutPage}/>
 
-      <hr/>
-
     </div>
   </BrowserRouter>
 );

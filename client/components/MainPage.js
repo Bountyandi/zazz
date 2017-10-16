@@ -2,24 +2,34 @@ import React, { Component } from 'react';
 import List from '../containers/List';
 import Popup from '../components/popup/popup';
 import SearchBox from '../containers/SearchBox';
-import { Header, Icon } from 'semantic-ui-react';
 
+import { Header, Icon,  } from 'semantic-ui-react';
 
 const MainPage = () => (
   <div>
     <MainHeader />
+
+    <hr/>
+    <br/>
+
     <Popup
-      componentName='AddNewTermino'
-      buttonName='New Termino'
-    />
+      icon={'add square'}
+      componentName={'AddNewTermino'}
+      buttonName={'New Termino'}
+      floated={'left'}
+      buttonColor='orange' />
+
+    <br/>
+    <br/>
 
     <SearchBox />
+
 
     <List />
 
   </div>
 );
-
+//GITLAB TEST
 const MainHeader = () => (
   <Header
     as='h2'
@@ -28,7 +38,7 @@ const MainHeader = () => (
   >
       <Header.Content>
           <Icon name='home' />
-          Main Page
+          Main
       </Header.Content>
   </Header>
 );

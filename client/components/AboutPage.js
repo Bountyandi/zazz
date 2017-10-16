@@ -13,7 +13,7 @@ const AboutHeader = () => (
   <Header
     as='h2'
     color='black'
-    /*subheader='Little bit about ZZAZ'*/
+    /*subheader='Little bit about ZAZZ'*/
   >
     <Header.Content>
       <Icon name='info' />

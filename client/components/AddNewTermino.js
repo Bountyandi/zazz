@@ -65,9 +65,13 @@ class AddNewTerminoView extends Component {
               onChange={this.handleChangeDescription} />
           </Form.Field>
 
-          <Button type='submit'>
-            Save
-          </Button>
+          <Button
+            icon={'check'}
+            buttonColor={'green'}
+            content={'save'}
+            floated={'right'}
+            color={'green'}
+            type='submit' />
 
         </Form>
 

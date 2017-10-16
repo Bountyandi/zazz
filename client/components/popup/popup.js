@@ -2,28 +2,7 @@ import React, { Component } from 'react'
 import Boron from 'boron'
 import AddNewTermino from '../AddNewTermino'
 import EditTermino from '../EditTermino'
-
-const styles = {
-  btn: {
-    //margin: '1em auto',
-    //padding: '1em 2em',
-    //outline: 'none',
-    //fontSize: 16,
-    //fontWeight: '600',
-    //background: '#C94E50',
-    //color: '#FFFFFF',
-    //border: 'none'
-  },
-  container: {
-    //padding: '2em',
-    //textAlign: 'center'
-  },
-  title: {
-    //margin: 0,
-    //color: '#C94E50',
-    //fontWeight: 400
-  }
-}
+import { Button } from 'semantic-ui-react';
 
 export default class Popup extends Component {
 
@@ -43,14 +22,21 @@ export default class Popup extends Component {
   }
 
   render() {
-    const modalName = 'ScaleModal'
-    const Modal = Boron[modalName]
-    const {buttonName, componentName, termino} = this.props
-    var form = 'AddNewTermino'
+    const modalName = 'ScaleModal';
+    const Modal = Boron[modalName];
+    const {
+      buttonName,
+      buttonColor,
+      componentName,
+      termino,
+      floated,
+      icon
+    } = this.props;
+    let form = 'AddNewTermino';
 
     switch (componentName) {
       case 'AddNewTermino':
-        form = <AddNewTermino/>
+        form = <AddNewTermino/>;
         break;
       case 'EditTermino':
         form =
@@ -58,19 +44,21 @@ export default class Popup extends Component {
             termino={termino}
             hideModal={this.hideModal}
             modalName={modalName}
-          />
+          />;
         break;
     }
 
     return (
-      <div style={styles.container}>
+      <div>
 
-        <button
-          style={styles.btn}
+        <Button compact
+          icon={icon}
+          content={buttonName}
+          floated={floated}
+          color={buttonColor}
           onClick={this.showModal(modalName)}
-        >
-          {this.props.buttonName}
-        </button>
+        />
+
 
         <Modal ref={modalName}>
           {form}
