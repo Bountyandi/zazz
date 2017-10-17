@@ -3,8 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchTerminos, removeTermino } from '../actions/asyncActions';
 import Termino from '../components/Termino';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import { Item } from 'semantic-ui-react';
+
+let style = {
+  /* We need to limit the height and show a scrollbar */
+  width: '100%',
+  height: window.outerHeight, //'500px',
+  overflow: 'auto',
+
+
+  border: '1px solid black',
+}
+
 
 class List extends Component {
   //static propTypes = {
@@ -12,12 +24,39 @@ class List extends Component {
   //  actions: PropTypes.object.isRequired
   //}
 
-  componentDidMount(){
-    this.props.fetchTerminos();
+
+
+  constructor(props) {
+    super(props);
+
+    this.scrollPagesCounter = 0;
+    //this.onUICount = 0;
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+
+  loadMore(ev) {
+
+    this.props.fetchTerminos(++this.scrollPagesCounter);
+    //let el = ev.target;
+    //debugger
+    //if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+    //  console.log(1)
+    //  this.props.fetchTerminos(++this.scrollPagesCounter);
+    //}
+
+  }
+
+  componentDidMount() {
+    this.props.fetchTerminos(this.scrollPagesCounter);
   }
 
   render() {
-    const { terminos } = this.props;
+    const { terminos, totalCount } = this.props;
+    //this.onUICount += terminos.length;
+    //console.log(this.onUICount)
+
     const listItems = terminos.map( item =>
       <Termino
         key={item._id}
@@ -28,17 +67,27 @@ class List extends Component {
       />
     );
 
+    debugger
+
     return (
-      <Item.Group>
-        {listItems}
-      </Item.Group>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.loadMore}
+        hasMore={totalCount > terminos.length}
+        loader={<div className='loader'>Loading ...</div>}
+      >
+        <Item.Group>
+          {listItems}
+        </Item.Group>
+      </InfiniteScroll>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    terminos: state.terminos
+    terminos: state.terminos,
+    totalCount: state.totalCount
   }
 }
 

@@ -1,9 +1,10 @@
 import * as types from '../constants/ActionsTypes'
 
-export const setTerminos = terminos => {
+export const setTerminos = ( terminos, totalCount ) => {
   return {
     type: types.SET_TERMINOS,
-    terminos
+    terminos,
+    totalCount
   }
 };
 

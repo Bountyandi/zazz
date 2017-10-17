@@ -2,9 +2,29 @@ import mongodb from 'mongodb';
 
 // remember about pagination and autoloading
 export const getTerminos = (req, res) => {
-  global.db.collection('terminos').find({}).toArray((err, terminos) => {
-    errorHandler(err);
-    res.json({ terminos });
+
+  let limit = 20; // in future must be parameter
+
+  const { page } = req.params;
+
+  console.log(page)
+
+  let totalCount = 0;
+  //bad bad
+  global.db.collection('terminos')
+    .find({})
+    .count((err, count ) => {
+      console.log(count)
+      totalCount = count;
+  });
+
+  global.db.collection('terminos')
+    .find({})
+    .skip(limit * page)
+    .limit(limit)
+    .toArray((err, terminos) => {
+      errorHandler(err);
+      res.json({ totalCount, terminos });
   })
 };
 

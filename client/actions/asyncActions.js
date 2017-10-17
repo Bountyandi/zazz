@@ -6,12 +6,15 @@ import {
 } from './actions';
 import API from './helpers/api';
 
-export const fetchTerminos = () => {
-  let url = '/api/terminos/';
+export const fetchTerminos = (page) => {
+  let url = `/api/terminos/${page}`;
   return dispatch => {
     API.get(url)
-      .then(data =>
-        dispatch(setTerminos(data.terminos)))
+      .then(data => {
+        dispatch(
+          setTerminos(data.terminos, data.totalCount)
+        )}
+      )
   }
 };
 

@@ -9,8 +9,8 @@ export default class Termino extends Component {
 
   static propTypes = {
     _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    //name: PropTypes.string.isRequired,
+    //description: PropTypes.string.isRequired,
     removeTermino: PropTypes.func.isRequired,
   };
 

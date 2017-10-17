@@ -29,7 +29,7 @@ const MainPage = () => (
 
   </div>
 );
-//GITLAB TEST 2
+
 const MainHeader = () => (
   <Header
     as='h2'

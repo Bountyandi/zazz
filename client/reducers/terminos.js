@@ -8,7 +8,12 @@ import {
 const initialState = [];
 
 const terminos = (state = initialState, action) => {
+
   switch (action.type) {
+
+    case SET_TERMINOS:
+      return [...state, ...action.terminos];
+
     case ADD_TERMINO:
       return [
         ...state,
@@ -23,8 +28,6 @@ const terminos = (state = initialState, action) => {
         return t
       });
 
-    case SET_TERMINOS:
-      return action.terminos;
 
     case DELETE_TERMINO:
       return state.filter( t =>

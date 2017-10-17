@@ -67,7 +67,6 @@ class AddNewTerminoView extends Component {
 
           <Button
             icon={'check'}
-            buttonColor={'green'}
             content={'save'}
             floated={'right'}
             color={'green'}

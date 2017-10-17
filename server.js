@@ -18,7 +18,7 @@ mongodb.MongoClient.connect(dbUrl, (dbErr, db) => {
 
   global.db = db;
 
-  app.get('/api/terminos/', api.getTerminos);
+  app.get('/api/terminos/:page', api.getTerminos);
 
   app.get('/api/terminos/search/:substr', api.searchTerminos);
 
