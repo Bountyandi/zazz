@@ -8,13 +8,13 @@ export const getTerminos = (req, res) => {
 
   //global.db.collection('terminos').createIndex({})
 
-  let totalCount = 0;
+  //let totalCount = 0;
   //bad bad
-  global.db.collection('terminos')
-    .find({})
-    .count((err, count ) => {
-      totalCount = count;
-  });
+  //global.db.collection('terminos')
+  //  .find({})
+  //  .count((err, count ) => {
+  //    totalCount = count;
+  //});
 
   global.db.collection('terminos')
     .find({})
@@ -22,7 +22,7 @@ export const getTerminos = (req, res) => {
     .limit(limit)
     .toArray((err, terminos) => {
       errorHandler(err);
-      res.json({ totalCount, terminos });
+      res.json({ terminos });
   })
 };
 

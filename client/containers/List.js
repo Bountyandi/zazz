@@ -20,24 +20,25 @@ class List extends Component {
     super(props);
 
     this.scrollPagesCounter = 0;
+    this.previousCount = 0;
 
     this.loadMore = this.loadMore.bind(this);
   }
-
 
   loadMore(ev) {
     this.props.fetchTerminos(++this.scrollPagesCounter);
   }
 
   componentDidMount() {
-    //need to rewrite it
+    //need to rewrite and replace it
     if (!this.props.terminos.length) {
       this.props.fetchTerminos(this.scrollPagesCounter);
     }
   }
 
   render() {
-    const { terminos, totalCount } = this.props;
+    const { terminos } = this.props;
+    let hasMore = this.previousCount < terminos.length;
 
     const listItems = terminos.map( item =>
       <Termino
@@ -49,11 +50,13 @@ class List extends Component {
       />
     );
 
+    this.previousCount = terminos.length;
+
     return (
       <InfiniteScroll
         pageStart={0}
         loadMore={this.loadMore}
-        hasMore={totalCount > terminos.length}
+        hasMore={hasMore}
         loader={<Loader active inline='centered'> Loading </Loader>}
       >
         <Item.Group>
@@ -66,8 +69,7 @@ class List extends Component {
 
 function mapStateToProps(state) {
   return {
-    terminos: state.terminos,
-    totalCount: state.totalCount
+    terminos: state.terminos
   }
 }
 
