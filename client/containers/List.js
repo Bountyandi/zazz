@@ -5,17 +5,7 @@ import { fetchTerminos, removeTermino } from '../actions/asyncActions';
 import Termino from '../components/Termino';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { Item } from 'semantic-ui-react';
-
-let style = {
-  /* We need to limit the height and show a scrollbar */
-  width: '100%',
-  height: window.outerHeight, //'500px',
-  overflow: 'auto',
-
-
-  border: '1px solid black',
-}
+import { Item, Loader } from 'semantic-ui-react';
 
 
 class List extends Component {
@@ -30,32 +20,24 @@ class List extends Component {
     super(props);
 
     this.scrollPagesCounter = 0;
-    //this.onUICount = 0;
 
     this.loadMore = this.loadMore.bind(this);
   }
 
 
   loadMore(ev) {
-
     this.props.fetchTerminos(++this.scrollPagesCounter);
-    //let el = ev.target;
-    //debugger
-    //if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-    //  console.log(1)
-    //  this.props.fetchTerminos(++this.scrollPagesCounter);
-    //}
-
   }
 
   componentDidMount() {
-    this.props.fetchTerminos(this.scrollPagesCounter);
+    //need to rewrite it
+    if (!this.props.terminos.length) {
+      this.props.fetchTerminos(this.scrollPagesCounter);
+    }
   }
 
   render() {
     const { terminos, totalCount } = this.props;
-    //this.onUICount += terminos.length;
-    //console.log(this.onUICount)
 
     const listItems = terminos.map( item =>
       <Termino
@@ -67,14 +49,12 @@ class List extends Component {
       />
     );
 
-    debugger
-
     return (
       <InfiniteScroll
         pageStart={0}
         loadMore={this.loadMore}
         hasMore={totalCount > terminos.length}
-        loader={<div className='loader'>Loading ...</div>}
+        loader={<Loader active inline='centered'> Loading </Loader>}
       >
         <Item.Group>
           {listItems}

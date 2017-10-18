@@ -5,6 +5,7 @@ import {
   deleteTermino,
 } from './actions';
 import API from './helpers/api';
+import totalCount from "../reducers/totalCount";
 
 export const fetchTerminos = (page) => {
   let url = `/api/terminos/${page}`;
@@ -18,12 +19,14 @@ export const fetchTerminos = (page) => {
   }
 };
 
-export const searchTerminos = ( substr ) => {
-  let url = `/api/terminos/search/${substr}`;
+export const searchTerminos = ( substr, page ) => {
+  let url = `/api/terminos/search/${substr}/`;
   return dispatch => {
     API.get(url)
-      .then(data =>
+      .then(data => {
+        debugger
         dispatch(setTerminos(data.terminos))
+        }
       )
   }
 };

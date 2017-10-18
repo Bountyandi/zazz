@@ -1,20 +1,18 @@
 import mongodb from 'mongodb';
+const limit = 20; // in future must be parameter from UI User
+
 
 // remember about pagination and autoloading
 export const getTerminos = (req, res) => {
-
-  let limit = 20; // in future must be parameter
-
   const { page } = req.params;
 
-  console.log(page)
+  //global.db.collection('terminos').createIndex({})
 
   let totalCount = 0;
   //bad bad
   global.db.collection('terminos')
     .find({})
     .count((err, count ) => {
-      console.log(count)
       totalCount = count;
   });
 
@@ -28,6 +26,40 @@ export const getTerminos = (req, res) => {
   })
 };
 
+export const searchTerminos = (req, res) => {
+  const { substr, page } = req.params;
+
+  let totalCount = 0;
+  //bad bad
+  global.db.collection('terminos')
+    .find({
+      $or: [
+        { name: {$regex: `.*${substr}.*`} },
+        { description: {$regex: `.*${substr}.*`} }
+      ]
+    })
+    .count((err, count ) => {
+      totalCount = count;
+    });
+
+  global.db.collection('terminos')
+    .find(
+      {
+        $or: [
+          { name: {$regex: `.*${substr}.*`} },
+          { description: {$regex: `.*${substr}.*`} }
+        ]
+      }
+    )
+    .skip(limit * page)
+    .limit(limit)
+    .toArray((err, terminos) => {
+      errorHandler(err);
+      res.json({ totalCount, terminos });
+    })
+};
+
+/*
 export const searchTerminos = (req, res) => {
   const { substr } = req.params;
 
@@ -43,6 +75,7 @@ export const searchTerminos = (req, res) => {
     res.json({ terminos });
   })
 };
+*/
 
 export const postTermino = (req, res) => {
   const { name, description } = req.body;
