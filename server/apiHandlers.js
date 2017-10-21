@@ -1,20 +1,16 @@
 import mongodb from 'mongodb';
+import tagsParser from './helpers/tagsParser';
+
 const limit = 20; // in future must be parameter from UI User
 
 
 // remember about pagination and autoloading
+
 export const getTerminos = (req, res) => {
   const { page } = req.params;
 
-  //global.db.collection('terminos').createIndex({})
-
-  //let totalCount = 0;
-  //bad bad
-  //global.db.collection('terminos')
-  //  .find({})
-  //  .count((err, count ) => {
-  //    totalCount = count;
-  //});
+  console.log('----------------------')
+  console.log('getTerminos')
 
   global.db.collection('terminos')
     .find({})
@@ -27,41 +23,10 @@ export const getTerminos = (req, res) => {
 };
 
 export const searchTerminos = (req, res) => {
-  const { substr, page } = req.params;
-
-  let totalCount = 0;
-  //bad bad
-  global.db.collection('terminos')
-    .find({
-      $or: [
-        { name: {$regex: `.*${substr}.*`} },
-        { description: {$regex: `.*${substr}.*`} }
-      ]
-    })
-    .count((err, count ) => {
-      totalCount = count;
-    });
-
-  global.db.collection('terminos')
-    .find(
-      {
-        $or: [
-          { name: {$regex: `.*${substr}.*`} },
-          { description: {$regex: `.*${substr}.*`} }
-        ]
-      }
-    )
-    .skip(limit * page)
-    .limit(limit)
-    .toArray((err, terminos) => {
-      errorHandler(err);
-      res.json({ totalCount, terminos });
-    })
-};
-
-/*
-export const searchTerminos = (req, res) => {
   const { substr } = req.params;
+
+  console.log('----------------------')
+  console.log('searchTerminos')
 
   global.db.collection('terminos').find(
     {
@@ -75,12 +40,14 @@ export const searchTerminos = (req, res) => {
     res.json({ terminos });
   })
 };
-*/
 
 export const postTermino = (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, tags } = req.body;
 
-  global.db.collection('terminos').insert({ name, description }, (err, result) => {
+  const createdAt = new Date();
+  const tagsArr = tagsParser(tags);
+
+  global.db.collection('terminos').insert({ name, description, tags: tagsArr, createdAt }, (err, result) => {
     errorHandler(err);
     res.json({ termino: result.ops[0]})
   })
@@ -115,3 +82,4 @@ function errorHandler(err) {
     res.status(500).json({errors: {global: 'Something went wrong'}});
   }
 }
+

@@ -2,8 +2,9 @@ import {
   ADD_TERMINO,
   SET_TERMINOS,
   DELETE_TERMINO,
-  EDIT_TERMINO
-} from '../constants/ActionsTypes'
+  EDIT_TERMINO,
+  ADD_TERMINOS,
+} from '../actions/ActionsTypes'
 
 const initialState = [];
 
@@ -11,13 +12,16 @@ const terminos = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case SET_TERMINOS:
+    case ADD_TERMINOS:
       return [...state, ...action.terminos];
+
+    case SET_TERMINOS:
+      return action.terminos;
 
     case ADD_TERMINO:
       return [
-        ...state,
-        action.termino
+        action.termino,
+        ...state
       ];
 
     case EDIT_TERMINO:

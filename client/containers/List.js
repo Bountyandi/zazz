@@ -9,27 +9,35 @@ import { Item, Loader } from 'semantic-ui-react';
 
 
 class List extends Component {
-  //static propTypes = {
-  //  posts: PropTypes.array.isRequired,
-  //  actions: PropTypes.object.isRequired
-  //}
-
+  static propTypes = {
+    terminos: PropTypes.array.isRequired,
+    removeTermino: PropTypes.func.isRequired,
+    fetchTerminos: PropTypes.func.isRequired
+  }
 
 
   constructor(props) {
     super(props);
 
     this.scrollPagesCounter = 0;
+
     this.previousCount = 0;
 
     this.loadMore = this.loadMore.bind(this);
   }
 
-  loadMore(ev) {
-    this.props.fetchTerminos(++this.scrollPagesCounter);
+  loadMore(scrollPagesCounter) {
+    //spike
+    if (this.hasMore) {
+      this.props.fetchTerminos(++this.scrollPagesCounter);
+    }
+    else {
+      this.scrollPagesCounter = 0;
+    }
   }
 
-  componentDidMount() {
+  //componentDidMount() {
+  componentWillMount() {
     //need to rewrite and replace it
     if (!this.props.terminos.length) {
       this.props.fetchTerminos(this.scrollPagesCounter);
@@ -38,7 +46,10 @@ class List extends Component {
 
   render() {
     const { terminos } = this.props;
-    let hasMore = this.previousCount < terminos.length;
+
+    //debugger
+    this.hasMore = this.previousCount < terminos.length;
+    debugger
 
     const listItems = terminos.map( item =>
       <Termino
@@ -56,7 +67,7 @@ class List extends Component {
       <InfiniteScroll
         pageStart={0}
         loadMore={this.loadMore}
-        hasMore={hasMore}
+        hasMore={this.hasMore}
         loader={<Loader active inline='centered'> Loading </Loader>}
       >
         <Item.Group>

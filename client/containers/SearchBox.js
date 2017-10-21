@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { searchTerminos, fetchTerminos } from '../actions/asyncActions';
 import _ from 'underscore';
 
-import { Input, Form, Responsive, Segment } from 'semantic-ui-react';
+import { Input,
+  Label,
+  Form,
+  Responsive,
+  Icon, Button
+} from 'semantic-ui-react';
 
 
 class SearchBox extends Component {
@@ -12,25 +17,38 @@ class SearchBox extends Component {
   constructor(props) {
     super(props);
 
+    this.scrollPagesCounter = 0;
+
     this.search = this.search.bind(this);
-    this.debouncedSearch =
-      _.debounce( this.debouncedSearch.bind(this), 200)
-  }
+    this.debouncedSearch = _.debounce( this.debouncedSearch.bind(this), 200 );
 
-  debouncedSearch(event){
-    var val = event.target.value;
-
-    if (val) {
-      this.props.searchTerminos(val);
-    } else {
-      this.props.fetchTerminos();
-    }
+    this.removeSearch = this.removeSearch.bind(this);
   }
 
   search(event){
     event.persist();
 
-    this.debouncedSearch(event)
+    this.debouncedSearch(event);
+  }
+  debouncedSearch(event){
+    let searchValue = event.target.value;
+    if (searchValue) {
+      this.props.searchTerminos(searchValue);
+    }
+    else {
+      //TODO: fix it
+      // now it can't scrolling after remove searchValue
+      // if length of searched array was > 20
+      this.props.fetchTerminos(0, true);
+    }
+  }
+
+  removeSearch(){
+    if (this.input.inputRef.value) {
+      this.input.inputRef.value = '';
+
+      this.props.fetchTerminos();
+    }
   }
 
   render() {
@@ -42,13 +60,25 @@ class SearchBox extends Component {
         <br />
 
         <Form.Field>
+
           <Input
             fluid
+            labelPosition='right'
+            type='text'
             size='huge'
-            icon='search'
             placeholder='Search...'
-            onChange={this.search} />
+            onChange={this.search}
+            ref={(input) => { this.input = input; }}
+          >
+            <Label basic icon='search' />
+            <input/>
+            <Button
+              icon='remove'
+              onClick={this.removeSearch}/>
+
+          </Input>
         </Form.Field>
+
         <br/>
 
       </div>

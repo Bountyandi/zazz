@@ -18,11 +18,13 @@ class AddNewTerminoView extends Component {
 
     this.state = {
       name: '',
-      description: ''
+      description: '',
+      tags: ''
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeTags = this.handleChangeTags.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -37,7 +39,11 @@ class AddNewTerminoView extends Component {
       description: event.target.value
     });
   }
-
+  handleChangeTags(event){
+    this.setState({
+      tags: event.target.value
+    });
+  }
 
   handleSubmit(event){
     event.preventDefault();
@@ -64,6 +70,14 @@ class AddNewTerminoView extends Component {
               value={this.state.description}
               onChange={this.handleChangeDescription} />
           </Form.Field>
+
+          <Form.Field>
+            <label>Tags</label>
+            <Input
+              value={this.state.tags}
+              onChange={this.handleChangeTags} />
+          </Form.Field>
+
 
           <Button
             icon={'check'}

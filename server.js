@@ -20,7 +20,7 @@ mongodb.MongoClient.connect(dbUrl, (dbErr, db) => {
 
   app.get('/api/terminos/:page', api.getTerminos);
 
-  app.get('/api/terminos/search/:substr', api.searchTerminos);
+  app.get('/api/terminos/search/:substr/', api.searchTerminos);
 
   app.post('/api/terminos/', api.postTermino);
 

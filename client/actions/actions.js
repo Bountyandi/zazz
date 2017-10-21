@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionsTypes'
+import * as types from './ActionsTypes'
 
 export const setTerminos = ( terminos ) => {
   return {
@@ -6,6 +6,14 @@ export const setTerminos = ( terminos ) => {
     terminos
   }
 };
+
+export const addTerminos = ( terminos ) => {
+  return {
+    type: types.ADD_TERMINOS,
+    terminos
+  }
+};
+
 
 export const addTermino = termino => {
   return {
