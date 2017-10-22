@@ -67,6 +67,7 @@ class AddNewTerminoView extends Component {
           <Form.Field>
             <label>Description</label>
             <TextArea
+              rows={7}
               value={this.state.description}
               onChange={this.handleChangeDescription} />
           </Form.Field>

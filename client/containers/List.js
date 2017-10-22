@@ -13,8 +13,7 @@ class List extends Component {
     terminos: PropTypes.array.isRequired,
     removeTermino: PropTypes.func.isRequired,
     fetchTerminos: PropTypes.func.isRequired
-  }
-
+  };
 
   constructor(props) {
     super(props);
@@ -47,9 +46,7 @@ class List extends Component {
   render() {
     const { terminos } = this.props;
 
-    //debugger
     this.hasMore = this.previousCount < terminos.length;
-    debugger
 
     const listItems = terminos.map( item =>
       <Termino
@@ -57,6 +54,7 @@ class List extends Component {
         _id={item._id}
         name={item.name}
         description={item.description}
+        tags={item.tags}
         removeTermino={this.props.removeTermino}
       />
     );

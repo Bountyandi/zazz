@@ -14,6 +14,7 @@ export const getTerminos = (req, res) => {
 
   global.db.collection('terminos')
     .find({})
+    .sort({createdAt: -1})
     .skip(limit * page)
     .limit(limit)
     .toArray((err, terminos) => {
