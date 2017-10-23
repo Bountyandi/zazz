@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-import { Segment } from 'semantic-ui-react'
+import { Label, Segment } from 'semantic-ui-react'
 
 
 export default class List extends Component {
@@ -23,23 +23,34 @@ export default class List extends Component {
   render() {
     const { tags } = this.props;
 
+    //const listItems = tags.map( (item, i) => {
+    //  return <Segment
+    //    inverted
+    //    color='teal'
+    //    compact
+    //    key={i}>
+    //    <a onClick={this.onClick}>
+    //      {item}
+    //    </a>
+    //  </Segment>}
+    //);
+
+
     const listItems = tags.map( (item, i) => {
-      return <Segment
-        inverted
-        color='teal'
-        compact
+      return <Label
+        Tag
         key={i}>
         <a onClick={this.onClick}>
           {item}
         </a>
-      </Segment>}
+      </Label>}
     );
 
-    return (
-      <Segment.Group horizontal>
-        {listItems}
-      </Segment.Group>
 
+    return (
+      <div>
+        {listItems}
+      </div>
     )
   }
 }

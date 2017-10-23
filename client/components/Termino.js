@@ -45,12 +45,13 @@ export default class Termino extends Component {
             <p>{description}</p>
           </Item.Description>
 
-          {/*<div>{tagsComp}</div>*/}
-
+          <br/>
           <Tags tags={tags}/>
 
           {/*TODO: Make 2 icons EDIT and DELETE*/}
-          <Button compact
+          <Button
+            basic
+            compact
             icon={'close'}
             content={'Delete'}
             floated={'right'}
@@ -59,6 +60,7 @@ export default class Termino extends Component {
           />
 
           <Popup
+            basic
             icon={'edit'}
             buttonName={'Edit'}
             floated={'right'}
