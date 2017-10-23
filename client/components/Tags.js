@@ -38,7 +38,6 @@ export default class List extends Component {
 
     const listItems = tags.map( (item, i) => {
       return <Label
-        Tag
         key={i}>
         <a onClick={this.onClick}>
           {item}

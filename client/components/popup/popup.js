@@ -1,72 +1,45 @@
 import React, { Component } from 'react'
-import Boron from 'boron'
-import AddNewTermino from '../AddNewTermino'
-import EditTermino from '../EditTermino'
-import { Button } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react'
+const modalSize = 'large';
 
-export default class Popup extends Component {
+class Popup extends Component {
 
-  constructor(){
-    super()
-
-    this.showModal = this.showModal.bind(this)
-    this.hideModal = this.hideModal.bind(this)
+  constructor(props) {
+    super(props);
+    this.state = { open: false }
   }
 
-  showModal(ref) {
-    return () => this.refs[ref].show()
-  }
+  /*
+    show(){
+      return this.setState({ open: true })
+    }
 
-  hideModal(ref) {
-    this.refs[ref].hide();
-  }
+    close(){
+      return this.setState({ open: false });
+    }
+  */
+
+  show = size => () => this.setState({ size, open: true });
+  close = () => this.setState({ open: false });
+
+
 
   render() {
-    const modalName = 'ScaleModal';
-    const Modal = Boron[modalName];
-    const {
-      buttonName,
-      buttonColor,
-      componentName,
-      termino,
-      floated,
-      icon
-    } = this.props;
-    let form = 'AddNewTermino';
+    const { open, size } = this.state;
+    const { modalView } = this.props;
 
-    switch (componentName) {
-      case 'AddNewTermino':
-        form = <AddNewTermino/>;
-        break;
-      case 'EditTermino':
-        form =
-          <EditTermino
-            termino={termino}
-            hideModal={this.hideModal}
-            modalName={modalName}
-          />;
-        break;
-    }
 
     return (
       <div>
+        <Button onClick={this.show()}>BUTTON_TEXT</Button>
 
-        <Button compact
-          icon={icon}
-          content={buttonName}
-          floated={floated}
-          color={buttonColor}
-          onClick={this.showModal(modalName)}
-        />
-
-
-        <Modal ref={modalName}>
-          {form}
+        <Modal size={modalSize} open={open} onClose={this.close}>
+          {/*<AddNewTermino />*/}
+          {modalView}
         </Modal>
-
       </div>
     )
   }
-
 }
 
+export default Popup

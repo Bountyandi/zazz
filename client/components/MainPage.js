@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import List from '../containers/List';
-import Popup from '../components/popup/popup';
+import Popup from './popup/popup';
 import SearchBox from '../containers/SearchBox';
+import AddNewTermino from './AddNewTermino';
 
-import { Header, Icon,  } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 
 const MainPage = () => (
   <div>
@@ -12,12 +13,19 @@ const MainPage = () => (
     <hr/>
     <br/>
 
+{/*
+
     <Popup
       icon={'add square'}
       componentName={'AddNewTermino'}
       buttonName={'New Termino'}
       floated={'left'}
       buttonColor='orange' />
+*/}
+
+
+    <Popup modalView={<AddNewTermino />} />
+
 
     <br/>
     <br/>

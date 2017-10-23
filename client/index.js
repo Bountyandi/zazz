@@ -3,11 +3,9 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './containers/App'
 
-
-
 import store, { history } from './store/store'
-const target = document.getElementById('root')
 
+const target = document.getElementById('root');
 
 render(
   <Provider store={store}>
@@ -16,4 +14,4 @@ render(
     </div>
   </Provider>,
   target
-)
+);

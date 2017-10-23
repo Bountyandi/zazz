@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Popup from './popup/popup'
+//import Popup from './popup/popup'
 import Tags from './Tags'
 
 import { Item, Button } from 'semantic-ui-react'
@@ -58,6 +58,7 @@ export default class Termino extends Component {
             color={'red'}
             onClick={this.removeTermino}
           />
+{/*
 
           <Popup
             basic
@@ -68,6 +69,7 @@ export default class Termino extends Component {
             componentName={'EditTermino'}
             termino={termino}
           />
+*/}
 
         </Item.Content>
 
