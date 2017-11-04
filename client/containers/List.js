@@ -54,6 +54,7 @@ class List extends Component {
         _id={item._id}
         name={item.name}
         description={item.description}
+        section={item.section}
         tags={item.tags}
         removeTermino={this.props.removeTermino}
       />

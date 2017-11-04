@@ -20,12 +20,14 @@ class AddNewTerminoView extends Component {
     this.state = {
       name: '',
       description: '',
-      tags: ''
+      tags: '',
+      section: 'JavaScript'
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeTags = this.handleChangeTags.bind(this);
+    this.handleChangeSection = this.handleChangeSection.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -42,6 +44,11 @@ class AddNewTerminoView extends Component {
   handleChangeTags(event){
     this.setState({
       tags: event.target.value
+    });
+  }
+  handleChangeSection(event){
+    this.setState({
+      section: event.target.value
     });
   }
 
@@ -62,7 +69,7 @@ class AddNewTerminoView extends Component {
           <Form.Field>
             <label>Name</label>
             <Input
-              placeholder='First Name'
+              placeholder='Name'
               value={this.state.name}
               onChange={this.handleChangeName}/>
           </Form.Field>
@@ -70,9 +77,19 @@ class AddNewTerminoView extends Component {
           <Form.Field>
             <label>Description</label>
             <TextArea
+              placeholder='Description'
               rows={7}
               value={this.state.description}
               onChange={this.handleChangeDescription}/>
+          </Form.Field>
+
+          {/* In future must be dropdown */}
+          <Form.Field>
+            <label>Section</label>
+            <Input
+              placeholder='Choose Your Section'
+              value={this.state.section}
+              onChange={this.handleChangeSection}/>
           </Form.Field>
 
           <Form.Field>

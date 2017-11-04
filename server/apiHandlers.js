@@ -3,9 +3,6 @@ import tagsParser from './helpers/tagsParser';
 
 const limit = 20; // in future must be parameter from UI User
 
-
-// remember about pagination and autoloading
-
 export const getTerminos = (req, res) => {
   const { page } = req.params;
 
@@ -43,12 +40,14 @@ export const searchTerminos = (req, res) => {
 };
 
 export const postTermino = (req, res) => {
-  const { name, description, tags } = req.body;
+  const { name, description, tags, section } = req.body;
 
   const createdAt = new Date();
   const tagsArr = tagsParser(tags);
 
-  global.db.collection('terminos').insert({ name, description, tags: tagsArr, createdAt }, (err, result) => {
+  global.db.collection('terminos')
+    .insert({ name, description, tags: tagsArr, section, createdAt }, (
+      err, result) => {
     errorHandler(err);
     res.json({ termino: result.ops[0]})
   })

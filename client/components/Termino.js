@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 //import Popup from './popup/popup'
 import Tags from './Tags'
 
-import { Item, Button } from 'semantic-ui-react'
+import { Item, Button, Label } from 'semantic-ui-react'
 
 
 export default class Termino extends Component {
@@ -13,6 +13,7 @@ export default class Termino extends Component {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     //tags: PropTypes.array.isRequired,
+    //section: PropTypes.string.isRequired,
     removeTermino: PropTypes.func.isRequired,
   };
 
@@ -31,8 +32,8 @@ export default class Termino extends Component {
 
   render() {
 
-    const { _id, name, description, tags } = this.props;
-    const termino = { _id, name, description, tags };
+    const { _id, name, description, tags, section } = this.props;
+    const termino = { _id, name, description, tags, section };
 
     //const tagsComp = tags ? <Tags tags={tags}/> : <p>a</p>
 
@@ -46,7 +47,8 @@ export default class Termino extends Component {
           </Item.Description>
 
           <br/>
-          <Tags tags={tags}/>
+
+          <Tags tags={tags} section={section}/>
 
           {/*TODO: Make 2 icons EDIT and DELETE*/}
           <Button

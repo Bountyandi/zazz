@@ -13,25 +13,15 @@ const MainPage = () => (
     <hr/>
     <br/>
 
-{/*
-
     <Popup
-      icon={'add square'}
-      componentName={'AddNewTermino'}
-      buttonName={'New Termino'}
-      floated={'left'}
-      buttonColor='orange' />
-*/}
-
-
-    <Popup modalView={<AddNewTermino />} />
-
+      modalView={<AddNewTermino />}
+      buttonName={'Add New Termino'}
+    />
 
     <br/>
     <br/>
 
     <SearchBox />
-
 
     <List />
 

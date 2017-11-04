@@ -22,16 +22,14 @@ class Popup extends Component {
   show = size => () => this.setState({ size, open: true });
   close = () => this.setState({ open: false });
 
-
-
   render() {
     const { open, size } = this.state;
-    const { modalView } = this.props;
+    const { modalView, buttonName } = this.props;
 
 
     return (
       <div>
-        <Button onClick={this.show()}>BUTTON_TEXT</Button>
+        <Button onClick={this.show()} color={'green'}>{buttonName}</Button>
 
         <Modal size={modalSize} open={open} onClose={this.close}>
           {/*<AddNewTermino />*/}

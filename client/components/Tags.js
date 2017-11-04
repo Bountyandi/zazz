@@ -21,24 +21,10 @@ export default class List extends Component {
   }
 
   render() {
-    const { tags } = this.props;
-
-    //const listItems = tags.map( (item, i) => {
-    //  return <Segment
-    //    inverted
-    //    color='teal'
-    //    compact
-    //    key={i}>
-    //    <a onClick={this.onClick}>
-    //      {item}
-    //    </a>
-    //  </Segment>}
-    //);
-
+    const { tags, section } = this.props;
 
     const listItems = tags.map( (item, i) => {
-      return <Label
-        key={i}>
+      return <Label key={i}>
         <a onClick={this.onClick}>
           {item}
         </a>
@@ -48,6 +34,7 @@ export default class List extends Component {
 
     return (
       <div>
+        <Label as='a' color='olive' tag>{section}</Label>
         {listItems}
       </div>
     )
