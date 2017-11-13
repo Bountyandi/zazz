@@ -22,10 +22,10 @@ class List extends Component {
 
     this.previousCount = 0;
 
-    this.loadMore = this.loadMore.bind(this);
+    //this.loadMore = this.loadMore.bind(this);
   }
 
-  loadMore(scrollPagesCounter) {
+  loadMore = (scrollPagesCounter) => {
     //spike
     if (this.hasMore) {
       this.props.fetchTerminos(++this.scrollPagesCounter);

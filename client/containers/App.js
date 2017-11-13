@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Router from '../components/router/Router';
 
 
 import { Container } from 'semantic-ui-react';
 
-const App = () => (
-  <Container>
+export default class App extends PureComponent {
+  render() {
+    return (
+      <Container>
+        <Router/>
+      </Container>
+    );
 
-    <Router />
-
-  </Container>
-);
-
-export default App
+  }
+};

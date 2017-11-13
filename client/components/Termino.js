@@ -19,10 +19,10 @@ export default class Termino extends Component {
 
   constructor(props){
     super(props);
-    this.removeTermino = this.removeTermino.bind(this);
+    //this.removeTermino = this.removeTermino.bind(this);
   }
 
-  removeTermino () {
+  removeTermino = () => {
     this.props.removeTermino({ _id: this.props._id });
   }
 
@@ -43,7 +43,7 @@ export default class Termino extends Component {
         <Item.Content>
           <Item.Header as='p'>{name}</Item.Header>
           <Item.Description>
-            <p>{description}</p>
+            <span dangerouslySetInnerHTML={{__html: description}}/>
           </Item.Description>
 
           <br/>

@@ -6,27 +6,32 @@ import AddNewTermino from './AddNewTermino';
 
 import { Header, Icon } from 'semantic-ui-react';
 
-const MainPage = () => (
-  <div>
-    <MainHeader />
+export default class MainPage extends Component {
+  render() {
+    return (
+      <div>
+        <MainHeader />
 
-    <hr/>
-    <br/>
+        <hr />
+        <br />
 
-    <Popup
-      modalView={<AddNewTermino />}
-      buttonName={'Add New Termino'}
-    />
+        <Popup
+          modalView={ <AddNewTermino /> }
+          buttonName={ 'Add New Termino' }
+        />
 
-    <br/>
-    <br/>
+        <br />
+        <br />
 
-    <SearchBox />
+        <SearchBox />
 
-    <List />
+        <List />
 
-  </div>
-);
+      </div>
+
+    )
+  }
+}
 
 const MainHeader = () => (
   <Header
@@ -34,10 +39,10 @@ const MainHeader = () => (
     color='black'
     /*subheader='Here U can work on your terminos'*/
   >
-      <Header.Content>
-          <Icon name='home' />
-          Main
-      </Header.Content>
+    <Header.Content>
+      <Icon name='home' />
+      Main
+    </Header.Content>
   </Header>
 );
 

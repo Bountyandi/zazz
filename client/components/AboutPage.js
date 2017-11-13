@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Header, Icon } from 'semantic-ui-react';
 
-const AboutPage = () => (
-  <div>
-    <AboutHeader />
+export default class AboutPage extends PureComponent {
+  render() {
+    return(
+      <div>
+        <AboutHeader />
 
 
-  </div>
-);
+      </div>
+    )
+  }
+}
 
 const AboutHeader = () => (
   <Header

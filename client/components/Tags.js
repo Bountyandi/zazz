@@ -16,7 +16,7 @@ export default class List extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick() {
+  _onClick = () => {
     // do search
   }
 

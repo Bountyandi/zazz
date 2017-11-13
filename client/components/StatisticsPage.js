@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Header, Icon } from 'semantic-ui-react';
 
-const StatisticsPage = ({  }) => (
-  <div>
-   <StatisticsHeader />
+export default class StatisticsPage extends PureComponent {
+  render() {
+    return(
+      <div>
+        <StatisticsHeader />
+      </div>
+    )
+  }
+}
 
-
-  </div>
-);
 
 const StatisticsHeader = () => (
   <Header
@@ -22,4 +25,3 @@ const StatisticsHeader = () => (
   </Header>
 );
 
-export default StatisticsPage

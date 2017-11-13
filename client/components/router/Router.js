@@ -14,7 +14,6 @@ import AboutPage from '../AboutPage'
  const Router = () => (
   <BrowserRouter>
     <div>
-
       <Menu color={'blue'} inverted widths={1}>
         <ul className='ui four item menu'>
           <Menu.Item as={Link} to='/'>Main</Menu.Item>
@@ -26,7 +25,6 @@ import AboutPage from '../AboutPage'
       <Route exact path='/' component={MainPage}/>
       <Route path='/statistics' component={StatisticsPage}/>
       <Route path='/about' component={AboutPage}/>
-
     </div>
   </BrowserRouter>
 );

@@ -19,13 +19,12 @@ class SearchBox extends Component {
 
     this.scrollPagesCounter = 0;
 
-    this.search = this.search.bind(this);
     this.debouncedSearch = _.debounce( this.debouncedSearch.bind(this), 200 );
-
-    this.removeSearch = this.removeSearch.bind(this);
+    //this.search = this.search.bind(this);
+    //this.removeSearch = this.removeSearch.bind(this);
   }
 
-  search(event){
+  search = (event) => {
     event.persist();
 
     this.debouncedSearch(event);
@@ -43,7 +42,7 @@ class SearchBox extends Component {
     }
   }
 
-  removeSearch(){
+  removeSearch = (event) => {
     if (this.input.inputRef.value) {
       this.input.inputRef.value = '';
 

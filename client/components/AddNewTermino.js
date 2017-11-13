@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+
+import RichTextBox from './RichTextBox/RichTextBox'
+
 import {
   Modal,
   Container,
@@ -23,39 +26,39 @@ class AddNewTerminoView extends Component {
       tags: '',
       section: 'JavaScript'
     };
-
-    this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeDescription = this.handleChangeDescription.bind(this);
-    this.handleChangeTags = this.handleChangeTags.bind(this);
-    this.handleChangeSection = this.handleChangeSection.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeName(event){
+  handleChangeName = (event) => {
     this.setState({
       name: event.target.value
     });
   }
-  handleChangeDescription(event){
+  handleChangeDescription = (event) => {
     this.setState({
       description: event.target.value
     });
   }
-  handleChangeTags(event){
+  handleChangeTags = (event) => {
     this.setState({
       tags: event.target.value
     });
   }
-  handleChangeSection(event){
+  handleChangeSection = (event) => {
     this.setState({
       section: event.target.value
     });
   }
 
-  handleSubmit(event){
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.saveTermino(this.state);
   }
+
+  _onChangeRichTextBox = (htmlText) => {
+    this.setState({
+      description: htmlText
+    });
+  };
 
   render() {
 
@@ -64,7 +67,6 @@ class AddNewTerminoView extends Component {
     </Modal.Header>;
 
     const Content = <Modal.Content key='Content'>
-        {/*<Form onSubmit={this.handleSubmit}>*/}
         <Form>
           <Form.Field>
             <label>Name</label>
@@ -76,11 +78,13 @@ class AddNewTerminoView extends Component {
 
           <Form.Field>
             <label>Description</label>
-            <TextArea
-              placeholder='Description'
-              rows={7}
-              value={this.state.description}
-              onChange={this.handleChangeDescription}/>
+
+            <RichTextBox
+              onChange={this._onChangeRichTextBox}
+            />
+
+
+
           </Form.Field>
 
           {/* In future must be dropdown */}

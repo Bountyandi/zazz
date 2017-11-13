@@ -15,27 +15,25 @@ class EditTerminoView extends Component {
       description: props.termino.description || ''
     }
 
-    this.handleChangeName = this.handleChangeName.bind(this)
-    this.handleChangeDescription = this.handleChangeDescription.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    //this.handleChangeName = this.handleChangeName.bind(this)
+    //this.handleChangeDescription = this.handleChangeDescription.bind(this)
+    //this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChangeName(event){
+  handleChangeName = (event) => {
     this.setState({
       name: event.target.value
     })
   }
   
-  handleChangeDescription(event){
+  handleChangeDescription = (event) => {
     this.setState({
       description: event.target.value
     })
   }
 
-  handleSubmit(event){
+  handleSubmit = (event) => {
     event.preventDefault();
-
-    //debugger
 
     this.props.changeTermino(this.state);
     this.props.hideModal(this.props.modalName);
@@ -57,5 +55,4 @@ class EditTerminoView extends Component {
 
 }
 
-const EditTermino = connect(null, { changeTermino })(EditTerminoView);
-export default EditTermino
+export default EditTermino = connect(null, { changeTermino })(EditTerminoView);
